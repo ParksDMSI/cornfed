@@ -13,9 +13,9 @@ const BoardContext = React.createContext();
 const arraysEqual = (a1,a2) => (JSON.stringify(a1)===JSON.stringify(a2))
 
 function App() {
-  const [board, setBoard] = useState([1,2,3,3,4,4,0,5,0])
+  const [board, setBoard] = useState([1,2,3,3,0,4,0,5,0])
   const [complexMode, setMode] = useState(false)
-  const restricted = [0,0,0,1,0,0,1,0,1]
+  const restricted = [0,0,0,1,1,0,1,0,1]
   const solution = [2,1,2,3,0,0,0,2,0]
   let solved = arraysEqual(board,solution)
 
