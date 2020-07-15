@@ -58,7 +58,7 @@ const numerals = [
 
 const Board = (props) => {
   return ( 
-    <div>
+    <div className= 'boardClass'>
       <GridRow iter = {0}/>
       <GridRow iter = {1}/>
       <GridRow iter = {2}/>
@@ -79,9 +79,9 @@ const Square = (props) => {
   return(
     <BoardContext.Consumer>
       {context => 
-        <button>
-          <img src = {(numerals[context.current[props.idx]])} width = "100" height = "150" alt= {props.idx} onClick = {() => handleClick(context,props.idx)}/> 
-        </button>      
+      <button >
+          <img className= 'square' src = {(numerals[context.current[props.idx]])} max-width = '100%' height = '100%' alt= {props.idx} onClick = {() => handleClick(context,props.idx)}/> 
+        </button>   
       }
     </BoardContext.Consumer>
  ) 
