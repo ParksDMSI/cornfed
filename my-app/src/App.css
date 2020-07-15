@@ -51,13 +51,14 @@ h1, p{
 }
 
 .square {
-  max-width: 16vh;
+  max-width: 12vh;
   border: 1px solid black;
   vertical-align: bottom;
 }
 
 .board {
   position: relative;
+  margin: 0px 10px 10px 0px
 }
 
 .lockRow {
@@ -92,7 +93,7 @@ h1, p{
 }
 
 .greySquare{
-  max-width: 16vh;
+  max-width: 12vh;
   border: 1px solid black;
   vertical-align: bottom;
   filter: invert(20%);  
