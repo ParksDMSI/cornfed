@@ -6,6 +6,10 @@ table, caption, tbody, tfoot, thead, tr, th, td {
   border: 0;
 }
 
+h1, p{
+  margin: 40px;
+}
+
 .App {
   min-height: 100vh;
   text-align: center;

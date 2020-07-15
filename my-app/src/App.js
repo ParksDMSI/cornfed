@@ -25,7 +25,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         {solved
         ? <h1>Congratulations! </h1>
-        : <p>There is an unusual lock on this wall with some familiar inscriptions</p>}
+        : <p>There is an unusual lock on this wall with some familiar inscriptions.</p>}
         <BoardContext.Provider
           value = {{
             current: board,
