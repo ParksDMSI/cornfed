@@ -39,7 +39,7 @@ function App() {
             },
           }}
         >
-          <Board className = "board" complexMode = {complexMode}/>
+          <Board complexMode = {complexMode}/>
         </BoardContext.Provider>
       </header>
       <div className = "littleRoom">
@@ -61,8 +61,8 @@ const numerals = [
 const Board = (props) => {
   console.log(props.complexMode)
   return (
-    <div>
-      <div className= 'board'>
+    <div className= 'board'>
+      <div >
         <GridRow iter = {0} complexMode = {props.complexMode}/>
         <GridRow iter = {1} complexMode = {props.complexMode}/>
         <GridRow iter = {2} complexMode = {props.complexMode}/>
@@ -93,7 +93,6 @@ const SumRow = (props) => (
     <ColumnSum idx = {12}/>
     <ColumnSum idx = {13}/>
     <ColumnSum idx = {14}/>
-    <EmptySquare idx = {15}/>
   </div>
 )
 
