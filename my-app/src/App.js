@@ -13,9 +13,9 @@ const BoardContext = React.createContext();
 
 const arraysEqual = (a1,a2) => (JSON.stringify(a1)===JSON.stringify(a2))
 
-
 function App() {
   const [board, setBoard] = useState([1,2,3,3,4,4,0,5,0])
+  const [complexMode, setMode] = useState(false)
   const restricted = [0,0,0,1,0,0,1,0,1]
   const solution = [2,1,2,3,0,0,0,2,0]
   let solved = arraysEqual(board,solution)
@@ -36,14 +36,14 @@ function App() {
             updateBoard: (idx,val) => {
               let current = board.slice(0,idx).concat(val,board.slice(idx+1,board.length))
               setBoard( current)
-            }
+            },
           }}
         >
-          <Board/>
+          <Board className = "board" complexMode = {complexMode}/>
         </BoardContext.Provider>
-        <br/>
-        <br/>
       </header>
+      <button onClick = {() => {setMode(!complexMode)}} > {complexMode?'Simple Mode':'Complex Mode'}</button>
+
     </div>
   );
 }
@@ -58,23 +58,33 @@ const numerals = [
 ]
 
 const Board = (props) => {
-  return ( 
-    <div className= 'boardClass'>
-      <GridRow iter = {0}/>
-      <GridRow iter = {1}/>
-      <GridRow iter = {2}/>
-      <SumRow />
-    </div>   
+  console.log(props.complexMode)
+  return (
+    <div>
+      <div className= 'board'>
+        <GridRow iter = {0} complexMode = {props.complexMode}/>
+        <GridRow iter = {1} complexMode = {props.complexMode}/>
+        <GridRow iter = {2} complexMode = {props.complexMode}/>
+      </div>
+      <div className = 'sumRow'>
+        {props.complexMode && <SumRow />}
+      </div>
+    </div> 
   )
 }
 
 const GridRow = (props) => (
   <div>
-    <Square idx = {(props.iter * 3) + 0}/>
-    <Square idx = {(props.iter * 3) + 1}/>
-    <Square idx = {(props.iter * 3) + 2}/>
-    <RowSum idx = {9+props.iter}/>
+    <div className='lockRow'>
+      <Square idx = {(props.iter * 3) + 0}/>
+      <Square idx = {(props.iter * 3) + 1}/>
+      <Square idx = {(props.iter * 3) + 2}/>
+    </div>
+    <div className = 'sumSquare'>
+      {props.complexMode && <RowSum idx = {9+props.iter}/>}
+    </div>
   </div>
+
 )
 
 const SumRow = (props) => (
