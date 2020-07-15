@@ -42,8 +42,9 @@ function App() {
           <Board className = "board" complexMode = {complexMode}/>
         </BoardContext.Provider>
       </header>
-      <button onClick = {() => {setMode(!complexMode)}} > {complexMode?'Simple Mode':'Complex Mode'}</button>
-
+      <div className = "littleRoom">
+        <button onClick = {() => {setMode(!complexMode)}} > {complexMode?'This is worse':'Need a hint?'}</button>
+      </div>
     </div>
   );
 }

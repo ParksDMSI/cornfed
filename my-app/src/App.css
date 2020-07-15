@@ -16,7 +16,7 @@
 
 .App-header {
 
-  min-height: 100vh;
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,9 +39,8 @@
 }
 
 .square {
-  background: #fff;
-  height: 5vh;
-  width: 5vh;
+  height: 6vh;
+  width: 8vh;
 }
 
 button {
@@ -68,4 +67,8 @@ button {
 .sumRow{
   position: absolute;
 
+}
+
+.littleRoom{
+  padding: 40px;
 }
