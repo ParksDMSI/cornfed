@@ -79,7 +79,7 @@ const Square = (props) => {
   return(
     <BoardContext.Consumer>
       {context => 
-      <button >
+      <button type="button">
           <img className= 'square' src = {(numerals[context.current[props.idx]])} max-width = '100%' height = '100%' alt= {props.idx} onClick = {() => handleClick(context,props.idx)}/> 
         </button>   
       }
