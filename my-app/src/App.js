@@ -6,6 +6,7 @@ import Hed from './numerals/Hed.png'
 import Mad from './numerals/Mad.png'
 import Sid from './numerals/Sid.png'
 import Tal from './numerals/Tal.png'
+import Blank from './numerals/Blank.png'
 import './App.css';
 
 const BoardContext = React.createContext();
@@ -24,7 +25,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         {solved
-        ? <h1>Solved!</h1>
+        ? <h1>Congratulations! </h1>
         : <p>There is an unusual lock on this wall with some familiar inscriptions</p>}
         <BoardContext.Provider
           value = {{
@@ -62,6 +63,7 @@ const Board = (props) => {
       <GridRow iter = {0}/>
       <GridRow iter = {1}/>
       <GridRow iter = {2}/>
+      <SumRow />
     </div>   
   )
 }
@@ -71,6 +73,16 @@ const GridRow = (props) => (
     <Square idx = {(props.iter * 3) + 0}/>
     <Square idx = {(props.iter * 3) + 1}/>
     <Square idx = {(props.iter * 3) + 2}/>
+    <RowSum idx = {9+props.iter}/>
+  </div>
+)
+
+const SumRow = (props) => (
+  <div>
+    <ColumnSum idx = {12}/>
+    <ColumnSum idx = {13}/>
+    <ColumnSum idx = {14}/>
+    <EmptySquare idx = {15}/>
   </div>
 )
 
@@ -85,6 +97,53 @@ const Square = (props) => {
       }
     </BoardContext.Consumer>
  ) 
+}
+
+const sliceBoard = (context,idx) => {
+  let sliceStart = (idx-9)*3
+return(
+  context.current.slice(sliceStart,sliceStart+3).reduce( (acc,cur) => (acc+=cur),0)%6
+)
+}
+
+const RowSum = (props) => {
+
+  return(
+    <BoardContext.Consumer>
+      {context => 
+        <button type="button" >
+          <img className= 'square' src = {(numerals[sliceBoard(context,props.idx)])} max-width = '100%' height = '100%' alt= {props.idx} /> 
+        </button>   
+      }
+    </BoardContext.Consumer>
+ ) 
+}
+
+const verticalSlice = (context,i) => {
+ return  context.current.reduce( (acc,cur,idx) => (
+  (idx % 3) === (i - 12)
+  ? acc += cur
+  : acc
+), 0 )% 6
+}
+
+const ColumnSum = (props) => {
+
+  return(
+    <BoardContext.Consumer>
+      {context => 
+        <button type="button" >
+          <img className= 'square' src = {(numerals[verticalSlice(context,props.idx)])} max-width = '100%' height = '100%' alt= {props.idx} /> 
+        </button>   
+      }
+    </BoardContext.Consumer>
+ ) 
+}
+
+const EmptySquare = (props) => {
+  return <button>
+    <img className = 'square' src = {Blank} max-width = '100%' height = '100%' alt= {props.idx} />
+  </button>
 }
 
 export default App;
