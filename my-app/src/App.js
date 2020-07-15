@@ -16,7 +16,7 @@ function App() {
   const [board, setBoard] = useState([1,2,3,3,3,4,0,5,0])
   const [complexMode, setMode] = useState(false)
   const restricted = [0,0,0,1,1,0,1,0,1]
-  const solution = [2,1,2,3,3,0,0,2,0]
+  const solution = [2,4,5,3,3,3,0,2,0]
   let solved = arraysEqual(board,solution)
 
   return (
