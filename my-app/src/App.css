@@ -39,8 +39,8 @@
 }
 
 .square {
-  height: 6vh;
-  width: 8vh;
+  max-height: 6vh;
+  max-width: 8vh;
 }
 
 button {
