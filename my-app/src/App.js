@@ -99,7 +99,7 @@ const Square = (props) => {
   return(
     <BoardContext.Consumer>
       {context => 
-        <img object-fit="fill" className= 'square' src = {(numerals[context.current[props.idx]])}  alt= {props.idx} onClick = {() => handleClick(context,props.idx)}/> 
+        <img object-fit="fill" className= {(context.solved || context.restricted[props.idx])? 'greySquare': 'square'} src = {(numerals[context.current[props.idx]])}  alt= {props.idx} onClick = {() => handleClick(context,props.idx)}/> 
       }
     </BoardContext.Consumer>
  ) 

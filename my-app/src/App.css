@@ -7,7 +7,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 }
 
 h1, p{
-  margin: 40px;
+  margin: 10px 40px 40px 10px;
 }
 
 .App {
@@ -17,7 +17,7 @@ h1, p{
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 20vh;
   pointer-events: none;
 }
 
@@ -51,15 +51,13 @@ h1, p{
 }
 
 .square {
-  max-width: 8vh;
+  max-width: 16vh;
   border: 1px solid black;
   vertical-align: bottom;
 }
 
 .board {
   position: relative;
-  margin: 40px;
-
 }
 
 .lockRow {
@@ -81,7 +79,8 @@ h1, p{
 }
 
 .littleRoom{
-  padding: 40px;
+  margin-top: 16vh;
+  height: 10vh
 }
 
 .gridRow{
@@ -92,3 +91,9 @@ h1, p{
   margin-bottom: 2px;
 }
 
+.greySquare{
+  max-width: 16vh;
+  border: 1px solid black;
+  vertical-align: bottom;
+  filter: invert(20%);  
+}
