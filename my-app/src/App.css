@@ -58,7 +58,7 @@ h1, p{
 
 .board {
   position: relative;
-  margin: 0px 12vh 0px 12vh
+  margin: 20px 60px 0px 60px
 }
 
 .lockRow {
@@ -81,7 +81,6 @@ h1, p{
 
 .littleRoom{
   margin-top: 16vh;
-  height: 10vh
 }
 
 .gridRow{
