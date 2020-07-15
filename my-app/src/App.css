@@ -7,7 +7,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 }
 
 h1, p{
-  margin: 10px 40px 40px 10px;
+  margin: 10px 40px 10px 40px;
 }
 
 .App {
@@ -58,7 +58,7 @@ h1, p{
 
 .board {
   position: relative;
-  margin: 0px 10px 10px 0px
+  margin: 0px 12vh 0px 12vh
 }
 
 .lockRow {
