@@ -6,7 +6,6 @@ import Hed from './numerals/Hed.png'
 import Mad from './numerals/Mad.png'
 import Sid from './numerals/Sid.png'
 import Tal from './numerals/Tal.png'
-import Blank from './numerals/Blank.png'
 import './App.css';
 
 const BoardContext = React.createContext();
@@ -59,15 +58,14 @@ const numerals = [
 ]
 
 const Board = (props) => {
-  console.log(props.complexMode)
   return (
     <div className= 'board'>
-      <div >
+      <div className ='lockBoard'>
         <GridRow iter = {0} complexMode = {props.complexMode}/>
         <GridRow iter = {1} complexMode = {props.complexMode}/>
         <GridRow iter = {2} complexMode = {props.complexMode}/>
       </div>
-      <div className = 'sumRow'>
+      <div className = {props.complexMode ? 'sumRow' : null}>
         {props.complexMode && <SumRow />}
       </div>
     </div> 
@@ -75,13 +73,13 @@ const Board = (props) => {
 }
 
 const GridRow = (props) => (
-  <div>
+  <div className = "gridRow">
     <div className='lockRow'>
       <Square idx = {(props.iter * 3) + 0}/>
       <Square idx = {(props.iter * 3) + 1}/>
       <Square idx = {(props.iter * 3) + 2}/>
     </div>
-    <div className = 'sumSquare'>
+    <div className = {props.complexMode ? 'sumSquare' : null}>
       {props.complexMode && <RowSum idx = {9+props.iter}/>}
     </div>
   </div>
@@ -89,7 +87,7 @@ const GridRow = (props) => (
 )
 
 const SumRow = (props) => (
-  <div>
+  <div className = "gridRow">
     <ColumnSum idx = {12}/>
     <ColumnSum idx = {13}/>
     <ColumnSum idx = {14}/>
@@ -101,9 +99,7 @@ const Square = (props) => {
   return(
     <BoardContext.Consumer>
       {context => 
-      <button type="button" >
-          <img className= 'square' src = {(numerals[context.current[props.idx]])} max-width = '100%' height = '100%' alt= {props.idx} onClick = {() => handleClick(context,props.idx)}/> 
-        </button>   
+        <img object-fit="fill" className= 'square' src = {(numerals[context.current[props.idx]])}  alt= {props.idx} onClick = {() => handleClick(context,props.idx)}/> 
       }
     </BoardContext.Consumer>
  ) 
@@ -111,9 +107,9 @@ const Square = (props) => {
 
 const sliceBoard = (context,idx) => {
   let sliceStart = (idx-9)*3
-return(
-  context.current.slice(sliceStart,sliceStart+3).reduce( (acc,cur) => (acc+=cur),0)%6
-)
+  return(
+    context.current.slice(sliceStart,sliceStart+3).reduce( (acc,cur) => (acc+=cur),0)%6
+  )
 }
 
 const RowSum = (props) => {
@@ -121,20 +117,18 @@ const RowSum = (props) => {
   return(
     <BoardContext.Consumer>
       {context => 
-        <button type="button" >
-          <img className= 'square' src = {(numerals[sliceBoard(context,props.idx)])} max-width = '100%' height = '100%' alt= {props.idx} /> 
-        </button>   
+          <img className= 'square' src = {(numerals[sliceBoard(context,props.idx)])} alt= {props.idx} /> 
       }
     </BoardContext.Consumer>
- ) 
+  ) 
 }
 
 const verticalSlice = (context,i) => {
- return  context.current.reduce( (acc,cur,idx) => (
-  (idx % 3) === (i - 12)
-  ? acc += cur
-  : acc
-), 0 )% 6
+  return  context.current.reduce( (acc,cur,idx) => (
+    (idx % 3) === (i - 12)
+    ? acc += cur
+    : acc
+  ), 0 )% 6
 }
 
 const ColumnSum = (props) => {
@@ -142,18 +136,10 @@ const ColumnSum = (props) => {
   return(
     <BoardContext.Consumer>
       {context => 
-        <button type="button" >
-          <img className= 'square' src = {(numerals[verticalSlice(context,props.idx)])} max-width = '100%' height = '100%' alt= {props.idx} /> 
-        </button>   
+          <img object-fit="cover" className= 'square' src = {(numerals[verticalSlice(context,props.idx)])} alt= {props.idx} /> 
       }
     </BoardContext.Consumer>
  ) 
-}
-
-const EmptySquare = (props) => {
-  return <button>
-    <img className = 'square' src = {Blank} max-width = '100%' height = '100%' alt= {props.idx} />
-  </button>
 }
 
 export default App;

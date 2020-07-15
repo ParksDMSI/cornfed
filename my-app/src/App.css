@@ -1,4 +1,13 @@
+html, body, div, span, object, iframe, img,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
 .App {
+  min-height: 100vh;
   text-align: center;
   background-color: #282c34;
 }
@@ -16,7 +25,6 @@
 
 .App-header {
 
-  min-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,37 +47,44 @@
 }
 
 .square {
-  max-height: 6vh;
   max-width: 8vh;
-}
-
-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-
+  border: 1px solid black;
+  vertical-align: bottom;
 }
 
 .board {
   position: relative;
+  margin: 40px;
 
 }
 
 .lockRow {
   display: inline-block;
-  position: relative;
+  margin-right: 2px;
 }
 
 .sumSquare {
   display: inline-block;
   position: absolute;
+  border: 1px solid red;
+  margin-top: -1px;
 }
 
 .sumRow{
   position: absolute;
-
+  margin-left: -1px;
+  border: 1px solid red;
 }
 
 .littleRoom{
   padding: 40px;
 }
+
+.gridRow{
+  margin: 0;
+}
+
+.lockBoard{
+  margin-bottom: 2px;
+}
+
