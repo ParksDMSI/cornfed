@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import logo from './logo.svg';
+import logo from './Cornfedtrans.png';
 import Id from './numerals/Id.png'
 import Brod from './numerals/Brod.png'
 import Hed from './numerals/Hed.png'
@@ -10,44 +10,6 @@ import './App.css';
 
 const BoardContext = React.createContext();
 
-const arraysEqual = (a1,a2) => (JSON.stringify(a1)===JSON.stringify(a2))
-
-function App() {
-  const [board, setBoard] = useState([1,2,3,3,3,4,0,5,0])
-  const [complexMode, setMode] = useState(false)
-  const restricted = [0,0,0,1,1,0,1,0,1]
-  const solution = [2,4,5,3,3,3,0,2,0]
-  let solved = arraysEqual(board,solution)
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        {solved
-        ? <h1>Congratulations! </h1>
-        : <p>There is an unusual lock on this wall with some familiar inscriptions.</p>}
-        <BoardContext.Provider
-          value = {{
-            current: board,
-            restricted,
-            solution,
-            solved,
-            updateBoard: (idx,val) => {
-              let current = board.slice(0,idx).concat(val,board.slice(idx+1,board.length))
-              setBoard( current)
-            },
-          }}
-        >
-          <Board complexMode = {complexMode}/>
-        </BoardContext.Provider>
-      </header>
-      <div className = "littleRoom">
-        <button onClick = {() => {setMode(!complexMode)}} > {complexMode?'This is worse':'Need a hint?'}</button>
-      </div>
-    </div>
-  );
-}
-
 const numerals = [
   Tal,
   Hed,
@@ -57,89 +19,144 @@ const numerals = [
   Sid
 ]
 
-const Board = (props) => {
-  return (
-    <div className= 'board'>
-      <div className ='lockBoard'>
-        <GridRow iter = {0} complexMode = {props.complexMode}/>
-        <GridRow iter = {1} complexMode = {props.complexMode}/>
-        <GridRow iter = {2} complexMode = {props.complexMode}/>
-      </div>
-      <div className = {props.complexMode ? 'sumRow' : null}>
-        {props.complexMode && <SumRow />}
-      </div>
-    </div> 
-  )
+const findColumnSums = (board) => {
+  let sums = board.map( (row) => ( row.reduce((acc,cur) => (acc += cur)%6,0)))
+  return sums
 }
 
-const GridRow = (props) => (
-  <div className = "gridRow">
-    <div className='lockRow'>
-      <Square idx = {(props.iter * 3) + 0}/>
-      <Square idx = {(props.iter * 3) + 1}/>
-      <Square idx = {(props.iter * 3) + 2}/>
-    </div>
-    <div className = {props.complexMode ? 'sumSquare' : null}>
-      {props.complexMode && <RowSum idx = {9+props.iter}/>}
-    </div>
-  </div>
+const findRowSums = (board) => {
+  const addArrays = (arr2) => (cur,idx) => (cur+=arr2[idx])%6
 
+const sumArrays = (arr1,arr2) => (
+    arr1.map( addArrays(arr2))
+  )
+  let sums = board.reduce( (acc,row) => (sumArrays(acc,row)),[0,0,0])
+  return sums
+}
+
+const arraysEqual = (a1,a2) => (JSON.stringify(a1)===JSON.stringify(a2))
+
+function App() {
+  const [board, setBoard] = useState([[0,1,2],[3,3,5],[0,7,0]])
+  const [complexMode, setMode] = useState(false)
+  const [showNumerals, setShowNumerals] = useState(false)
+  const [rowSums, setRowSums] =useState(findRowSums(board))
+  const [columnSums, setColumnSums] =useState(findColumnSums(board))
+  const code = [5,3,2]
+  const locked = [[0,0,0],[1,1,0],[1,0,1]]
+  let solved = (arraysEqual(code,rowSums) && arraysEqual(code,columnSums))
+
+  const renderBoard = (complexMode) => 
+  (
+    complexMode ?
+      <div>
+        <Lock board = {board}/>
+        <SumColumn sums = {columnSums}/>
+        <SumRow sums ={rowSums}/>
+      </div>
+      : <Lock board = {board}/>
+  )
+
+  const renderNumerals = (showNumerals) => (
+    showNumerals ? 
+    <div>
+      <div className = 'NumeralRow'>
+        {numerals.map( (cur,idx) => (
+          <div className = 'Numerals' key = {idx}>
+            <Square className = 'Numeral' numeral ={idx} key ={idx}/>
+          </div>
+        ))}
+      </div>
+      <div className = 'KeyRow'>
+      {numerals.map( (cur,idx) => (
+          <div className = 'Key' key = {idx}>
+            <h1 >{idx}</h1>
+          </div>
+        ))}
+      </div>
+    </div>
+  : null
+  )
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        {solved?<h1>Congratulations! </h1>:
+        <p>You have found a lock embedded in a wall that looks to be of Draconic make. Althought at first the symbols seem unfamiliar, you soon recognize them as the numerals Dragons use in their base 6 counting system. The inscription above the lock says in common: "These doors shall open for none other than the two hundreth descendant of the Great Dragon Celestian"</p>}
+      </header>
+      <BoardContext.Provider
+        value = {{
+          solved,
+          locked,
+          updateBoard: (row, square, val) => {
+            let current = board.slice()
+            current[row][square] = val
+            setBoard(current)
+            setColumnSums(findColumnSums(current))
+            setRowSums(findRowSums(current))
+          }
+        }}
+      >
+        {renderBoard(complexMode)}
+        {renderNumerals(showNumerals)}
+      </BoardContext.Provider>
+      <div className = "littleRoom">
+        <button onClick = {() => {setMode(!complexMode)}} > {complexMode?'This is worse':'Need a hint?'}</button>
+        <button onClick = {() => {setShowNumerals(!showNumerals)}}>Toggle Numerals</button>
+      </div>
+    </div>
+  );
+}
+
+const Lock = (props) => (
+  <div className = 'Lock'>
+    {props.board.map( (cur,rowNum) => <LockRow row={cur} rowNum = {rowNum} key ={rowNum}/>)}
+  </div>
+  )
+
+const LockRow = (props) => (
+  <BoardContext.Consumer>
+    {context => 
+      <div className = 'LockRow'>
+        {props.row.map( (cur,square) => (
+            <Square 
+              locked = {context.locked[props.rowNum][square] || context.solved}
+              className = "LockSquare" 
+              numeral = {cur} 
+              rowNum = {props.rowNum} 
+              key = {square} 
+              callback = {() => context.updateBoard(props.rowNum,square,cur +1 % 6)}/>    
+        ))}    
+      </div>
+    }
+  </BoardContext.Consumer>
 )
 
 const SumRow = (props) => (
-  <div className = "gridRow">
-    <ColumnSum idx = {12}/>
-    <ColumnSum idx = {13}/>
-    <ColumnSum idx = {14}/>
-  </div>
-)
+    <div className = 'SumRow'>
+      {props.sums.map( (cur,idx) => <Square className = "SumRowSquare" numeral ={cur } key ={idx}/>)}
+    </div>
+  )
+
+const SumColumn = (props) => (
+    <div className = 'SumColumn'>
+      {props.sums.map( (cur,idx) => <Square className = 'SumColumnSquare' numeral = {cur } key={idx}/>)}
+    </div>
+  )
 
 const Square = (props) => {
-  const handleClick = (context,idx) => ((context.solved || context.restricted[idx]) ? null : context.updateBoard(idx, (context.current[props.idx] + 1)%6))
   return(
-    <BoardContext.Consumer>
-      {context => 
-        <img object-fit="fill" className= {(context.solved || context.restricted[props.idx])? 'greySquare': 'square'} src = {(numerals[context.current[props.idx]])}  alt= {props.idx} onClick = {() => handleClick(context,props.idx)}/> 
-      }
-    </BoardContext.Consumer>
- ) 
-}
-
-const sliceBoard = (context,idx) => {
-  let sliceStart = (idx-9)*3
-  return(
-    context.current.slice(sliceStart,sliceStart+3).reduce( (acc,cur) => (acc+=cur),0)%6
+        <div className = {props.className}>
+          <img 
+            className = {props.locked ? 'LockedSquare'  :'Square'}  
+            alt = {props.numeral} 
+            object-fit="cover" 
+            src={numerals[props.numeral % 6]} 
+            onClick = {!props.locked ? props.callback : null}
+          />
+        </div>
   )
-}
-
-const RowSum = (props) => {
-
-  return(
-    <BoardContext.Consumer>
-      {context => 
-          <img className= 'square' src = {(numerals[sliceBoard(context,props.idx)])} alt= {props.idx} /> 
-      }
-    </BoardContext.Consumer>
-  ) 
-}
-
-const verticalSlice = (context,i) => {
-  return  context.current.reduce( (acc,cur,idx) => (
-    (idx % 3) === (i - 12)
-    ? acc += cur
-    : acc
-  ), 0 )% 6
-}
-
-const ColumnSum = (props) => {
-
-  return(
-    <BoardContext.Consumer>
-      {context => 
-          <img object-fit="cover" className= 'square' src = {(numerals[verticalSlice(context,props.idx)])} alt= {props.idx} /> 
-      }
-    </BoardContext.Consumer>
- ) 
 }
 
 export default App;
