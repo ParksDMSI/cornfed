@@ -62,7 +62,7 @@ h1, p{
   align-self: center;
   position: relative;
   height: auto;
-  max-width: 16vw;
+  max-width: 24vw;
   /* margin: 5% 10% 0 10%; */
   display: inline-block;
 }
@@ -82,7 +82,7 @@ h1, p{
 }
 
 .SumRow{
-  max-width: 16vw;
+  max-width: 24vw;
   position: relative;
   display: block;
   border: 1px solid red;
@@ -92,7 +92,7 @@ h1, p{
 .SumColumn{
   display: inline-block;
   position: absolute;
-  max-width: calc(16vw * .33);
+  max-width: calc(24vw * .33);
   height: auto;
   border: 1px solid red;
 }
