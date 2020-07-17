@@ -13,6 +13,9 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 h1, p{
   max-width: 60%;
 }
+h2{
+  vertical-align: center;
+}
 
 .App {
   min-height: 100vh;
@@ -144,6 +147,7 @@ h1, p{
   background-color: white;
   border: 1px solid green;
   display: table-cell;
+  vertical-align: middle;
 
 }
 
