@@ -59,21 +59,13 @@ function App() {
 
   const renderNumerals = (showNumerals) => (
     showNumerals ? 
-    <div>
-      <div className = 'NumeralRow'>
+    <div className = 'NumeralTable'>
         {numerals.map( (cur,idx) => (
-          <div className = 'Numerals' key = {idx}>
+          <div className = 'NumeralRow'>
             <Square className = 'Numeral' numeral ={idx} key ={idx}/>
+            <h2 className = 'Key'>{idx}</h2>
           </div>
         ))}
-      </div>
-      <div className = 'KeyRow'>
-      {numerals.map( (cur,idx) => (
-          <div className = 'Key' key = {idx}>
-            <h1 >{idx}</h1>
-          </div>
-        ))}
-      </div>
     </div>
   : null
   )
@@ -98,8 +90,8 @@ function App() {
           }
         }}
       >
-        {renderBoard(complexMode)}
         {renderNumerals(showNumerals)}
+        {renderBoard(complexMode)}
       </BoardContext.Provider>
       <div className = "littleRoom">
         <button onClick = {() => {setMode(!complexMode)}} > {complexMode?'This is worse':'Need a hint?'}</button>

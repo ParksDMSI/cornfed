@@ -11,8 +11,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 }
 
 h1, p{
-  margin: auto;
-  max-width: 66%;
+  max-width: 60%;
 }
 
 .App {
@@ -65,6 +64,7 @@ h1, p{
   max-width: 24vw;
   /* margin: 5% 10% 0 10%; */
   display: inline-block;
+  margin: auto;
 }
 .LockRow{
   position: relative;
@@ -118,30 +118,33 @@ h1, p{
 
 }
 
+.NumeralTable{
+  display: table;
+  width: 10%;
+  height: 10%;
+  position: absolute;
+  left: 25%;
+}
+
 .NumeralRow{
-  max-width: 33%;
-  align-self: center;
-  margin: 5vh auto auto auto;
+  display: table-row;
 }
 
-.Numerals{
-  max-width: calc( (100% / 6 ));
+.Numeral{
+  height:auto;
+  width: 50%;
+  display: table-cell;
+  vertical-align: bottom;
   border: 1px solid green;
-  display: inline-block;
-}
-
-.KeyRow{
-  max-width: 33%;
-  align-self: center;
-  margin: auto auto 5vh auto;
 }
 
 .Key{
-  width: calc((100% / 6 ));
-  margin: auto;
-  float: left;
-  border: 1px solid green;
+  height: (50% * 4 / 3);
+  max-width: 50%;
   background-color: white;
+  border: 1px solid green;
+  display: table-cell;
+
 }
 
 .littleRoom{
