@@ -59,13 +59,15 @@ function App() {
 
   const renderNumerals = (showNumerals) => (
     showNumerals ? 
+    <div className = 'Ass'>
     <div className = 'NumeralTable'>
         {numerals.map( (cur,idx) => (
-          <div className = 'NumeralRow'>
+          <div key = {idx} className = 'NumeralRow'>
             <Square className = 'Numeral' numeral ={idx} key ={idx}/>
             <h2 className = 'Key'>{idx}</h2>
           </div>
         ))}
+    </div>
     </div>
   : null
   )

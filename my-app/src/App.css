@@ -18,11 +18,13 @@ h2{
 }
 
 .App {
-  min-height: 100vh;
-  min-width: 10vw;
+  height: 100vh;
+  width: 100vw;
   text-align: center;
-  justify-content: center;
   background-color: #282c34;
+}
+
+.Ass{
 }
 
 .App-logo {
@@ -63,57 +65,60 @@ h2{
 .Lock{
   align-self: center;
   position: relative;
-  height: auto;
-  max-width: 24vw;
+  width: 33vmin;
+  max-height: 33vmin;
   /* margin: 5% 10% 0 10%; */
   display: inline-block;
   margin: auto;
 }
+
 .LockRow{
   position: relative;
-  max-width: 100%;
+  width: 100%;
   height: 33%;
-  margin: 1px 0 1px 0;
 }
 
 .LockSquare{
   display: inline-block;
-  max-width: calc(33% - 3px);
-  height: auto;
-  margin: 0 1px 0 1px;
+  width: 33%;
+  height: 100%;
+  border: 1px solid black;
 
 }
 
 .SumRow{
-  max-width: 24vw;
+  max-height: 11vmin;
+  width: 33vmin;
   position: relative;
-  display: block;
-  border: 1px solid red;
-  margin: 2px auto auto auto;
+  margin: 1px auto auto auto;
 }
 
 .SumColumn{
   display: inline-block;
   position: absolute;
-  max-width: calc(24vw * .33);
+  height: 33vmin;
+  max-width: 11vmin;
   height: auto;
-  border: 1px solid red;
 }
 
 .SumRowSquare{
-  max-width: calc(33% - 3px);
-  height: auto;
-  margin: 1px;
+  width: 33%;
+  height: 100%;
   display: inline-block;
-  
+  border: 1px solid red;
 }
+
 .SumColumnSquare{
-  vertical-align: bottom;
-  margin: 1px;
+  max-height: 33%;
+  width: calc(100% - 1px);
+  display: block;
+  border: 1px solid red;
+
 }
+
 .Square{
-  max-width: 100%;
-  height: auto;
+  height: 100%;
+  width: 100%;
   vertical-align: bottom;
 }
 
@@ -123,27 +128,29 @@ h2{
 
 .NumeralTable{
   display: table;
-  width: 10%;
-  height: 10%;
+  width: 16vmin;
   position: absolute;
-  left: 25%;
+  left: 15vw;
+  margin-right: 30px;
 }
 
 .NumeralRow{
+  height: calc(100%/6);
+  width: 100%;
   display: table-row;
 }
 
 .Numeral{
-  height:auto;
-  width: 50%;
   display: table-cell;
-  vertical-align: bottom;
+  height: 8vmin;
+  width: 50%;
   border: 1px solid green;
+
 }
 
 .Key{
-  height: (50% * 4 / 3);
-  max-width: 50%;
+  height: calc(100%/6);
+  width:50%;
   background-color: white;
   border: 1px solid green;
   display: table-cell;
@@ -160,8 +167,8 @@ h2{
 }
 
 .LockedSquare{
-  max-width: 100%;
-  height: auto;
+  width: 100%;
+  height: 100%;
   vertical-align: bottom;
   filter: invert(20%); 
 }
