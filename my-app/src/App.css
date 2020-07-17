@@ -6,13 +6,20 @@ table, caption, tbody, tfoot, thead, tr, th, td {
   border: 0;
 }
 
+*{
+  box-sizing: border-box;
+}
+
 h1, p{
-  margin: 10px 40px 10px 40px;
+  margin: auto;
+  max-width: 66%;
 }
 
 .App {
   min-height: 100vh;
+  min-width: 10vw;
   text-align: center;
+  justify-content: center;
   background-color: #282c34;
 }
 
@@ -21,11 +28,11 @@ h1, p{
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
+/* @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
+} */
 
 .App-header {
 
@@ -33,8 +40,9 @@ h1, p{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(2px + 2vmin);
   color: white;
+  margin: auto auto 5vh auto;
 }
 
 .App-link {
@@ -50,50 +58,103 @@ h1, p{
   }
 }
 
-.square {
-  max-width: 12vh;
-  border: 1px solid black;
+.Lock{
+  align-self: center;
+  position: relative;
+  height: auto;
+  max-width: 16vw;
+  /* margin: 5% 10% 0 10%; */
+  display: inline-block;
+}
+.LockRow{
+  position: relative;
+  max-width: 100%;
+  height: 33%;
+  margin: 1px 0 1px 0;
+}
+
+.LockSquare{
+  display: inline-block;
+  max-width: calc(33% - 3px);
+  height: auto;
+  margin: 0 1px 0 1px;
+
+}
+
+.SumRow{
+  max-width: 16vw;
+  position: relative;
+  display: block;
+  border: 1px solid red;
+  margin: 2px auto auto auto;
+}
+
+.SumColumn{
+  display: inline-block;
+  position: absolute;
+  max-width: calc(16vw * .33);
+  height: auto;
+  border: 1px solid red;
+}
+
+.SumRowSquare{
+  max-width: calc(33% - 3px);
+  height: auto;
+  margin: 1px;
+  display: inline-block;
+  
+}
+.SumColumnSquare{
+  vertical-align: bottom;
+  margin: 1px;
+}
+.Square{
+  max-width: 100%;
+  height: auto;
   vertical-align: bottom;
 }
 
-.board {
-  position: relative;
-  margin: 20px 60px 0px 60px
+.LockedSquare{
+
 }
 
-.lockRow {
+.NumeralRow{
+  max-width: 33%;
+  align-self: center;
+  margin: 5vh auto auto auto;
+}
+
+.Numerals{
+  max-width: calc( (100% / 6 ));
+  border: 1px solid green;
   display: inline-block;
-  margin-right: 2px;
 }
 
-.sumSquare {
-  display: inline-block;
-  position: absolute;
-  border: 1px solid red;
-  margin-top: -1px;
+.KeyRow{
+  max-width: 33%;
+  align-self: center;
+  margin: auto auto 5vh auto;
 }
 
-.sumRow{
-  position: absolute;
-  margin-left: -1px;
-  border: 1px solid red;
+.Key{
+  width: calc((100% / 6 ));
+  margin: auto;
+  float: left;
+  border: 1px solid green;
+  background-color: white;
 }
 
 .littleRoom{
-  margin-top: 16vh;
+  margin: 5vh auto 0 auto;
+  position: absolute;
+  left: 30%;
+  right: 30%;
+  top: 90%;
 }
 
-.gridRow{
-  margin: 0;
-}
-
-.lockBoard{
-  margin-bottom: 2px;
-}
-
-.greySquare{
-  max-width: 12vh;
-  border: 1px solid black;
+.LockedSquare{
+  max-width: 100%;
+  height: auto;
   vertical-align: bottom;
-  filter: invert(20%);  
+  filter: invert(20%); 
 }
