@@ -159,11 +159,11 @@ h2{
 }
 
 .littleRoom{
-  margin: 5vh auto 10vh auto;
+  margin: 5vh auto 0 auto;
   position: absolute;
   left: 30%;
   right: 30%;
-  top: 90%;
+  top: 80%;
 }
 
 .LockedSquare{
