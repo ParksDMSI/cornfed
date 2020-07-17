@@ -77,7 +77,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         {solved?<h1>Congratulations! </h1>:
-        <p>You have found a lock embedded in a wall that looks to be of Draconic make. Althought at first the symbols seem unfamiliar, you soon recognize them as the numerals Dragons use in their base 6 counting system. The inscription above the lock says in common: "These doors shall open for none other than the two hundreth descendant of the Great Dragon Celestian"</p>}
+        <p>You have found a lock embedded in a wall that looks to be of Draconic make. Althought at first the symbols seem unfamiliar, you soon recognize them as the numerals Dragons use in their base 6 counting system. The inscription above the lock says in common: "These doors shall open for none other than the two hundredth descendant of the Great Dragon Celestian"</p>}
       </header>
       <BoardContext.Provider
         value = {{
