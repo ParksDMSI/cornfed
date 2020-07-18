@@ -24,9 +24,6 @@ h2{
   background-color: #282c34;
 }
 
-.Ass{
-}
-
 .App-logo {
   height: 20vh;
   pointer-events: none;
@@ -120,10 +117,6 @@ h2{
   height: 100%;
   width: 100%;
   vertical-align: bottom;
-}
-
-.LockedSquare{
-
 }
 
 .NumeralTable{
